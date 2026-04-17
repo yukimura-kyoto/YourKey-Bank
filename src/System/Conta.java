@@ -19,6 +19,7 @@ public class Conta {
         }else {
             saldo +=quantidade;
             addExtrato(quantidade);
+            System.out.println("Depósito realizado com sucesso");
         }
     }
 
@@ -27,7 +28,8 @@ public class Conta {
             System.out.println("Valor Invalido");
         }else{
             saldo -=quantidade;
-            addExtrato(-quantidade);
+            addExtrato(quantidade);
+            System.out.println("Saque realizado com sucesso");
         }
     }
 
@@ -43,7 +45,14 @@ public class Conta {
         System.out.println("=== EXTRATO ===");
 
         for (int i = 0; i < extrato.size(); i++) {
-            System.out.println(extrato.get(i));
+
+            int visual = extrato.get(i);
+
+            if (visual>=0){
+                System.out.println("▲ Depósito: "+visual);
+            } else {
+                System.out.println("▼ Saque: "+visual);
+            }
         }
     }
 
