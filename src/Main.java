@@ -21,12 +21,16 @@ public class Main {
                 case 2:
                     // deposito
                     int a=ui.getInput();
-                    acc.deposito(a);
+                    if (acc.deposito(a)){
+                        printDeposito();
+                    }else {printInvalid();}
                     break;
                 case 3:
                     // saque
                     int b=ui.getInput();
-                    acc.saque(b);
+                    if (acc.saque(b)){
+                        printSaque();
+                    }else {printInvalid();}
                     break;
                 case 4:
                     // mostrar extrato de transferencia

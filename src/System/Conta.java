@@ -6,6 +6,7 @@ public class Conta {
 
     private double saldo;
     private String nome;
+    private double quantidade;
 
     private ArrayList<Transacao> extrato = new ArrayList<>();
 
@@ -13,23 +14,23 @@ public class Conta {
         this.saldo = saldo;
     }
 
-    public void deposito(int quantidade){
-        if (quantidade<0){
-            System.out.println("Valor Invalido");
-        }else {
-            saldo +=quantidade;
+    public boolean deposito(int quantidade){
+        if (quantidade>0){
+            saldo+=quantidade;
             extrato.add(new Transacao(quantidade, Transacao.TipoTransacao.DEPOSITO));
-            System.out.println("Depósito realizado com sucesso");
+            return true;
+        }else {
+            return false;
         }
     }
 
-    public void saque(int quantidade){
-        if (quantidade> saldo){
-            System.out.println("Valor Invalido");
-        }else{
-            saldo -=quantidade;
+    public boolean saque(int quantidade){
+        if (quantidade<saldo){
+            saldo-=quantidade;
             extrato.add(new Transacao(quantidade, Transacao.TipoTransacao.SAQUE));
-            System.out.println("Saque realizado com sucesso");
+            return true;
+        }else{
+            return false;
         }
     }
 

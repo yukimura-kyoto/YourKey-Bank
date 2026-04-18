@@ -7,7 +7,7 @@ import System.Transacao;
 
 public class TerminalUI {
 
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
 
     public int getInput(){
@@ -22,6 +22,14 @@ public class TerminalUI {
         System.out.println("4 - Extrato");
         System.out.println("0 - Sair");
         System.out.print("Escolha uma opção: ");
+    }
+
+    public static void printDeposito(){
+        System.out.println("Depósito realizado com sucesso");
+    }
+
+    public static void printSaque(){
+        System.out.println("Saque realizado com sucesso");
     }
 
     public static void printInvalid(){
