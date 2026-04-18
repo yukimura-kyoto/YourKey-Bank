@@ -23,20 +23,20 @@ public class Main {
                     // deposito
                     int i = sc.nextInt();
                     acc.deposito(i);
-                    System.out.println(acc.getSaldo());
                     break;
                 case 3:
                     // saque
                     int b = sc.nextInt();
                     acc.saque(b);
-                    System.out.println(acc.getSaldo());
                     break;
                 case 4:
                     // mostrar extrato de transferencia
                     acc.mostrarExtrato();
+                    break;
                 case 0:
                     System.exit(0);
                 default:
+                    System.out.println("Opção Invalida");
             }
         }
     }

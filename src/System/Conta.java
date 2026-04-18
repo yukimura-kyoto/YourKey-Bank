@@ -7,7 +7,7 @@ public class Conta {
     private double saldo;
     private String nome;
 
-    private ArrayList<Integer> extrato = new ArrayList<>();
+    private ArrayList<Transacao> extrato = new ArrayList<>();
 
     public Conta(double saldo){
         this.saldo = saldo;
@@ -18,7 +18,7 @@ public class Conta {
             System.out.println("Valor Invalido");
         }else {
             saldo +=quantidade;
-            addExtrato(quantidade);
+            extrato.add(new Transacao(quantidade,"1", Transacao.TipoTransacao.DEPOSITO));
             System.out.println("Depósito realizado com sucesso");
         }
     }
@@ -28,7 +28,7 @@ public class Conta {
             System.out.println("Valor Invalido");
         }else{
             saldo -=quantidade;
-            addExtrato(quantidade);
+            extrato.add(new Transacao(quantidade,"1", Transacao.TipoTransacao.SAQUE));
             System.out.println("Saque realizado com sucesso");
         }
     }
@@ -37,21 +37,17 @@ public class Conta {
         return saldo;
     }
 
-    private void addExtrato(int valor) {
-        extrato.add(valor);
-    }
-
     public void mostrarExtrato() {
         System.out.println("=== EXTRATO ===");
 
         for (int i = 0; i < extrato.size(); i++) {
 
-            int visual = extrato.get(i);
+            Transacao transacao = extrato.get(i);
 
-            if (visual>=0){
-                System.out.println("▲ Depósito: "+visual);
-            } else {
-                System.out.println("▼ Saque: "+visual);
+            if (transacao.getTipo()== Transacao.TipoTransacao.SAQUE){
+                System.out.println(transacao.getDataTransacao()+" | "+transacao.getTipo()+" | ▼ R$"+transacao.getValorTransacao());
+            }else {
+                System.out.println(transacao.getDataTransacao()+" | "+transacao.getTipo()+" | ▲ R$"+transacao.getValorTransacao());
             }
         }
     }
