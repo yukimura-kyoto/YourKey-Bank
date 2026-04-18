@@ -18,7 +18,7 @@ public class Conta {
             System.out.println("Valor Invalido");
         }else {
             saldo +=quantidade;
-            extrato.add(new Transacao(quantidade,"1", Transacao.TipoTransacao.DEPOSITO));
+            extrato.add(new Transacao(quantidade, Transacao.TipoTransacao.DEPOSITO));
             System.out.println("Depósito realizado com sucesso");
         }
     }
@@ -28,7 +28,7 @@ public class Conta {
             System.out.println("Valor Invalido");
         }else{
             saldo -=quantidade;
-            extrato.add(new Transacao(quantidade,"1", Transacao.TipoTransacao.SAQUE));
+            extrato.add(new Transacao(quantidade, Transacao.TipoTransacao.SAQUE));
             System.out.println("Saque realizado com sucesso");
         }
     }
@@ -37,19 +37,7 @@ public class Conta {
         return saldo;
     }
 
-    public void mostrarExtrato() {
-        System.out.println("=== EXTRATO ===");
-
-        for (int i = 0; i < extrato.size(); i++) {
-
-            Transacao transacao = extrato.get(i);
-
-            if (transacao.getTipo()== Transacao.TipoTransacao.SAQUE){
-                System.out.println(transacao.getDataTransacao()+" | "+transacao.getTipo()+" | ▼ R$"+transacao.getValorTransacao());
-            }else {
-                System.out.println(transacao.getDataTransacao()+" | "+transacao.getTipo()+" | ▲ R$"+transacao.getValorTransacao());
-            }
-        }
+    public ArrayList<Transacao> getExtrato(){
+        return new ArrayList<>(extrato);
     }
-
 }

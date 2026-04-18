@@ -1,42 +1,41 @@
+import HUD.TerminalUI;
 import System.Conta;
 
 import java.util.Scanner;
 
-import static HUD.Interface.contaMenu;
+import static HUD.TerminalUI.*;
 
 public class Main {
-
-    static void main() {
+    static void main(String[] args) {
 
         Conta acc = new Conta(0);
-        Scanner sc = new Scanner(System.in);
+        TerminalUI ui = new TerminalUI();
 
         while (true){
             contaMenu();
-            int z = sc.nextInt();
-            switch (z){
+            int c=ui.getInput();
+            switch (c){
                 case 1:
                     // get saldo
-                    System.out.println(acc.getSaldo());
                     break;
                 case 2:
                     // deposito
-                    int i = sc.nextInt();
-                    acc.deposito(i);
+                    int a=ui.getInput();
+                    acc.deposito(a);
                     break;
                 case 3:
                     // saque
-                    int b = sc.nextInt();
+                    int b=ui.getInput();
                     acc.saque(b);
                     break;
                 case 4:
                     // mostrar extrato de transferencia
-                    acc.mostrarExtrato();
+                    printExtrato(acc);
                     break;
                 case 0:
                     System.exit(0);
                 default:
-                    System.out.println("Opção Invalida");
+                    printInvalid();
             }
         }
     }
