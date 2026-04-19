@@ -20,6 +20,12 @@ public class Transacao {
         this.tipo = tipo;
     }
 
+    public Transacao(double valorTransacao,String dataTransacao, TipoTransacao tipo){
+        this.valorTransacao = valorTransacao;
+        this.dataTransacao = dataTransacao;
+        this.tipo = tipo;
+    }
+
     private String getDateTime() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();

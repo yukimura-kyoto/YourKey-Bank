@@ -2,12 +2,16 @@ import HUD.TerminalUI;
 import System.Conta;
 
 import static HUD.TerminalUI.*;
+import static System.AccountManager.carregarConta;
+import static System.AccountManager.salvarConta;
+
 import System.StatusTransacao;
 
 public class Main {
     static void main(String[] args) {
 
-        Conta acc = new Conta(0);
+        Conta acc = carregarConta("user");
+
         TerminalUI ui = new TerminalUI();
         int opcao;
         StatusTransacao resultado;
@@ -48,6 +52,7 @@ public class Main {
                 default:
                     printOpcaoInvalid();
             }
+            salvarConta(acc);
         }
     }
 }
