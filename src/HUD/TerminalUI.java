@@ -24,20 +24,28 @@ public class TerminalUI {
         System.out.print("Escolha uma opção: ");
     }
 
-    public static void printDeposito(){
-        System.out.println("Depósito realizado com sucesso");
+    public static void printDepositoSucesso(){
+        System.out.println("Depósito realizado com sucesso. Saldo atualizado.");
     }
 
-    public static void printSaque(){
-        System.out.println("Saque realizado com sucesso");
+    public static void printSaqueSucesso(){
+        System.out.println("Saque realizado com sucesso. Saldo atualizado.");
     }
 
-    public static void printInvalid(){
+    public static void printSaqueFalha(){
+        System.out.println("Saldo Insuficiente");
+    }
+
+    public static void printValorInvalid(){
+        System.out.println("Valor Invalido. Tente Novamente");
+    }
+
+    public static void printOpcaoInvalid(){
         System.out.println("Opcão Invalida");
     }
 
     public static void printSaldo(Conta acc){
-        System.out.println(acc.getSaldo());
+        System.out.println("Seu saldo atual é: R$"+acc.getSaldo());
     }
 
     public static void printExtrato(Conta acc){
@@ -54,5 +62,13 @@ public class TerminalUI {
             System.out.println(transacaoFormat);
         }
         System.out.println("===============================================\n");
+    }
+
+    public static void printValorDeposito(){
+        System.out.print("Digite o valor do depósito: ");
+    }
+
+    public static void printValorSaque(){
+        System.out.print("Digite o valor do saque: ");
     }
 }

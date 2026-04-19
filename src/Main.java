@@ -1,36 +1,43 @@
 import HUD.TerminalUI;
 import System.Conta;
 
-import java.util.Scanner;
-
 import static HUD.TerminalUI.*;
+import System.StatusTransacao;
 
 public class Main {
     static void main(String[] args) {
 
         Conta acc = new Conta(0);
         TerminalUI ui = new TerminalUI();
+        int opcao;
+        StatusTransacao resultado;
 
         while (true){
             contaMenu();
-            int c=ui.getInput();
-            switch (c){
+            opcao=ui.getInput();
+            switch (opcao){
                 case 1:
                     // get saldo
+                    printSaldo(acc);
                     break;
                 case 2:
                     // deposito
-                    int a=ui.getInput();
-                    if (acc.deposito(a)){
-                        printDeposito();
-                    }else {printInvalid();}
+                    printValorDeposito();
+                    resultado = acc.deposito(ui.getInput());
+                    switch (resultado) {
+                        case SUCESSO           -> printDepositoSucesso();
+                        case VALOR_INVALIDO    -> printValorInvalid();
+                    }
                     break;
                 case 3:
                     // saque
-                    int b=ui.getInput();
-                    if (acc.saque(b)){
-                        printSaque();
-                    }else {printInvalid();}
+                    printValorSaque();
+                    resultado = acc.saque(ui.getInput());
+                    switch (resultado) {
+                        case SUCESSO           -> printSaqueSucesso();
+                        case VALOR_INVALIDO    -> printValorInvalid();
+                        case FALHA -> printSaqueFalha();
+                    }
                     break;
                 case 4:
                     // mostrar extrato de transferencia
@@ -39,7 +46,7 @@ public class Main {
                 case 0:
                     System.exit(0);
                 default:
-                    printInvalid();
+                    printOpcaoInvalid();
             }
         }
     }

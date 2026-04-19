@@ -14,24 +14,19 @@ public class Conta {
         this.saldo = saldo;
     }
 
-    public boolean deposito(int quantidade){
-        if (quantidade>0){
-            saldo+=quantidade;
-            extrato.add(new Transacao(quantidade, Transacao.TipoTransacao.DEPOSITO));
-            return true;
-        }else {
-            return false;
-        }
+    public StatusTransacao deposito(int quantidade){
+        if (quantidade<=0) return StatusTransacao.VALOR_INVALIDO;
+        saldo+=quantidade;
+        extrato.add(new Transacao(quantidade, Transacao.TipoTransacao.DEPOSITO));
+        return StatusTransacao.SUCESSO;
     }
 
-    public boolean saque(int quantidade){
-        if (quantidade<saldo){
-            saldo-=quantidade;
-            extrato.add(new Transacao(quantidade, Transacao.TipoTransacao.SAQUE));
-            return true;
-        }else{
-            return false;
-        }
+    public StatusTransacao saque(int quantidade){
+        if (quantidade<=0) return StatusTransacao.VALOR_INVALIDO;
+        if (quantidade>saldo) return StatusTransacao.FALHA;
+        saldo-=quantidade;
+        extrato.add(new Transacao(quantidade, Transacao.TipoTransacao.SAQUE));
+        return StatusTransacao.SUCESSO;
     }
 
     public double getSaldo(){
