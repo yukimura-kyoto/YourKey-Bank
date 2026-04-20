@@ -18,7 +18,7 @@ public class Main {
 
         while (true){
             contaMenu();
-            opcao=ui.getInput();
+            opcao=ui.getInt();
             switch (opcao){
                 case 1:
                     // get saldo
@@ -27,7 +27,7 @@ public class Main {
                 case 2:
                     // deposito
                     printValorDeposito();
-                    resultado = acc.deposito(ui.getInput());
+                    resultado = acc.deposito(ui.getDouble());
                     switch (resultado) {
                         case SUCESSO           -> printDepositoSucesso();
                         case VALOR_INVALIDO    -> printValorInvalid();
@@ -36,7 +36,7 @@ public class Main {
                 case 3:
                     // saque
                     printValorSaque();
-                    resultado = acc.saque(ui.getInput());
+                    resultado = acc.saque(ui.getDouble());
                     switch (resultado) {
                         case SUCESSO           -> printSaqueSucesso();
                         case VALOR_INVALIDO    -> printValorInvalid();

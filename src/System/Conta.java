@@ -15,14 +15,14 @@ public class Conta {
         this.nome = nome;
     }
 
-    public StatusTransacao deposito(int quantidade){
+    public StatusTransacao deposito(double quantidade){
         if (quantidade<=0) return StatusTransacao.VALOR_INVALIDO;
         saldo+=quantidade;
         addTransacao(new Transacao(quantidade, Transacao.TipoTransacao.DEPOSITO));
         return StatusTransacao.SUCESSO;
     }
 
-    public StatusTransacao saque(int quantidade){
+    public StatusTransacao saque(double quantidade){
         if (quantidade<=0) return StatusTransacao.VALOR_INVALIDO;
         if (quantidade>saldo) return StatusTransacao.FALHA;
         saldo-=quantidade;

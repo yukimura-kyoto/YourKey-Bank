@@ -10,8 +10,24 @@ public class TerminalUI {
     static Scanner sc = new Scanner(System.in);
 
 
-    public int getInput(){
-        return sc.nextInt();
+    public int getInt(){
+        while(true){
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                printOpcaoInvalid();
+            }
+        }
+    }
+
+    public double getDouble(){
+        while(true){
+            try {
+                return Double.parseDouble(sc.nextLine());
+            } catch (NumberFormatException e) {
+                printValorInvalid();
+            }
+        }
     }
 
     public static void contaMenu(){
@@ -37,11 +53,15 @@ public class TerminalUI {
     }
 
     public static void printValorInvalid(){
-        System.out.println("Valor Invalido. Tente Novamente");
+        System.out.print("Valor Invalido. Tente Novamente: ");
     }
 
     public static void printOpcaoInvalid(){
-        System.out.println("Opcão Invalida");
+        System.out.print("Opcão Invalida. Tente Novamente: ");
+    }
+
+    public static void printDigiteValorValido(){
+        System.out.println("Por favor digite um Valor valido");
     }
 
     public static void printSaldo(Conta acc){
@@ -61,7 +81,7 @@ public class TerminalUI {
             String transacaoFormat = String.format("%s | %-8s | %s R$ %8.2f",dataFormat,tipoFormat,seta,valorFormat);
             System.out.println(transacaoFormat);
         }
-        System.out.println("===============================================\n");
+        System.out.println("===============================================\n"+"Saldo Atual: R$"+String.format("%8.2f",acc.getSaldo()));
     }
 
     public static void printValorDeposito(){
