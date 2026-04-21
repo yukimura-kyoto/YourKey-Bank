@@ -76,7 +76,7 @@ public class TerminalUI {
             String seta = (transacao.getType()== Transaction.TransactionType.SAQUE) ? "▼" : "▲";
             double valorFormat = transacao.getTransactionValue();
             String tipoFormat = transacao.getType().name();
-            String dataFormat = transacao.getData();
+            String dataFormat = transacao.getDate();
 
             String transacaoFormat = String.format("%s | %-8s | %s R$ %8.2f",dataFormat,tipoFormat,seta,valorFormat);
             System.out.println(transacaoFormat);

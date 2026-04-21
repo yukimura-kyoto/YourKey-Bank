@@ -7,22 +7,24 @@ import java.util.Date;
 public class Transaction {
 
     private double transactionValue;
-    private String transactionDate;
+    private String date;
     private TransactionType type;
 
     public enum TransactionType {
         DEPOSITO, SAQUE
     }
 
+    public Transaction(){}
+
     public Transaction(double transactionValue, TransactionType type){
         this.transactionValue = transactionValue;
-        transactionDate = getDateTime();
+        date = getDateTime();
         this.type = type;
     }
 
     public Transaction(double transactionValue, String transactionDate, TransactionType type){
         this.transactionValue = transactionValue;
-        this.transactionDate = transactionDate;
+        this.date = transactionDate;
         this.type = type;
     }
 
@@ -36,8 +38,12 @@ public class Transaction {
         return type;
     }
 
-    public String getData(){
-        return transactionDate;
+    public String getDate(){
+        return date;
+    }
+
+    public void setDate(String date){
+        this.date = date;
     }
 
     public double getTransactionValue(){

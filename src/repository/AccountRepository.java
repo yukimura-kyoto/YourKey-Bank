@@ -3,26 +3,25 @@ package repository;
 import model.Account;
 import model.Transaction;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.*;
 
 public class AccountRepository {
 
+    static ObjectMapper om = new ObjectMapper();
+
     public static void saveAccount(Account acc){
         try{
+            // isso só cria o banco de dados
             File file = new File("Data");
             if (!file.exists()) {
                 file.mkdirs();
             }
+            File data = new File("Data/"+acc.getName()+".json");
 
-            FileWriter fw = new FileWriter("Data/"+acc.getName()+".txt");
-            fw.write(acc.getName()+"\n");
-            fw.write(String.valueOf(acc.getBalance()+"\n"));
+            om.writerWithDefaultPrettyPrinter().writeValue(data, acc);
 
-            for (Transaction transaction : acc.getStatement()){
-                String line = transaction.getType()+";"+ transaction.getData()+";"+ transaction.getTransactionValue();
-                fw.write(line +"\n");
-            }
-            fw.close();
         }catch (IOException e) {
             System.out.println("Erro ao salvar: " + e.getMessage());
         }
@@ -30,26 +29,21 @@ public class AccountRepository {
 
     public static Account loadAccount(String name){
         try{
-            BufferedReader br = new BufferedReader(new FileReader("Data/"+ name +".txt"));
-            String accountName = br.readLine();
-            double balance = Double.parseDouble(br.readLine());
+            System.out.println("LOAD FOI CHAMADO");
+            File file = new File("Data/"+name+".json");
 
-            Account acc = new Account(balance, accountName);
+            System.out.println(file.getAbsolutePath());
+            System.out.println(file.exists());
 
-            String line;
-
-            while ((line = br.readLine())!=null){
-                String[] parts = line.split(";");
-                Transaction.TransactionType type = Transaction.TransactionType.valueOf(parts[0]);
-                String date = (parts[1]);
-                double value = Double.parseDouble(parts[2]);
-
-                Transaction t = new Transaction(value, date,type);
-                acc.addTransaction(t);
+            if (!file.exists()) {
+                return new Account(0, name);
             }
+            Account acc = om.readValue(file,Account.class);
+
             return acc;
         }catch (IOException e) {
-            System.out.println("Nenhum save encontrado.");
+            System.out.println("ENTROU NO CATCH");
+            e.printStackTrace();
             return new Account(0,"user");
         }
     }

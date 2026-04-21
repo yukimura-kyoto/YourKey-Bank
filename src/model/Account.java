@@ -9,6 +9,8 @@ public class Account {
 
     private ArrayList<Transaction> statement = new ArrayList<>();
 
+    public Account(){}
+
     public Account(double balance, String name){
         this.balance = balance;
         this.name = name;
@@ -25,6 +27,9 @@ public class Account {
     public String getName(){
         return name;
     }
+    public void setName(String name){
+        this.name = name;
+    }
 
     public void addTransaction(Transaction t){
         statement.add(t);
@@ -32,5 +37,9 @@ public class Account {
 
     public ArrayList<Transaction> getStatement(){
         return new ArrayList<>(statement);
+    }
+
+    public void setStatement(ArrayList<Transaction> statement){
+        this.statement = statement;
     }
 }

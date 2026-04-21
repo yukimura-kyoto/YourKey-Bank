@@ -1,0 +1,13 @@
+{
+  "balance" : 700.0,
+  "name" : "user",
+  "statement" : [ {
+    "transactionValue" : 1000.0,
+    "date" : "21/04/2026 12:42:08",
+    "type" : "DEPOSITO"
+  }, {
+    "transactionValue" : 300.0,
+    "date" : "21/04/2026 12:42:11",
+    "type" : "SAQUE"
+  } ]
+}
