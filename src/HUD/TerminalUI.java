@@ -2,8 +2,8 @@ package HUD;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import System.Conta;
-import System.Transacao;
+import model.Account;
+import model.Transaction;
 
 public class TerminalUI {
 
@@ -64,24 +64,24 @@ public class TerminalUI {
         System.out.println("Por favor digite um Valor valido");
     }
 
-    public static void printSaldo(Conta acc){
-        System.out.println("Seu saldo atual é: R$"+acc.getSaldo());
+    public static void printSaldo(Account acc){
+        System.out.println("Seu saldo atual é: R$"+acc.getBalance());
     }
 
-    public static void printExtrato(Conta acc){
+    public static void printExtrato(Account acc){
         System.out.println("\n=================== EXTRATO ===================");
-        ArrayList<Transacao> extrato = acc.getExtrato();
+        ArrayList<Transaction> extrato = acc.getStatement();
 
-        for (Transacao transacao:extrato){
-            String seta = (transacao.getTipo()==Transacao.TipoTransacao.SAQUE) ? "▼" : "▲";
-            double valorFormat = transacao.getValorTransacao();
-            String tipoFormat = transacao.getTipo().name();
+        for (Transaction transacao:extrato){
+            String seta = (transacao.getType()== Transaction.TransactionType.SAQUE) ? "▼" : "▲";
+            double valorFormat = transacao.getTransactionValue();
+            String tipoFormat = transacao.getType().name();
             String dataFormat = transacao.getData();
 
             String transacaoFormat = String.format("%s | %-8s | %s R$ %8.2f",dataFormat,tipoFormat,seta,valorFormat);
             System.out.println(transacaoFormat);
         }
-        System.out.println("===============================================\n"+"Saldo Atual: R$"+String.format("%8.2f",acc.getSaldo()));
+        System.out.println("===============================================\n"+"Saldo Atual: R$"+String.format("%8.2f",acc.getBalance()));
     }
 
     public static void printValorDeposito(){
@@ -89,6 +89,6 @@ public class TerminalUI {
     }
 
     public static void printValorSaque(){
-        System.out.print("Digite o valor do saque: ");
+        System.out.print("Digite o valor do withdraw: ");
     }
 }

@@ -1,20 +1,22 @@
 import HUD.TerminalUI;
-import System.Conta;
+import model.Account;
 
 import static HUD.TerminalUI.*;
-import static System.AccountManager.carregarConta;
-import static System.AccountManager.salvarConta;
+import static repository.AccountRepository.loadAccount;
+import static repository.AccountRepository.saveAccount;
 
-import System.StatusTransacao;
+import model.TransactionStatus;
+import service.AccountService;
 
 public class Main {
     static void main(String[] args) {
 
-        Conta acc = carregarConta("user");
+        Account acc = loadAccount("user");
+        AccountService accService = new AccountService();
 
         TerminalUI ui = new TerminalUI();
         int opcao;
-        StatusTransacao resultado;
+        TransactionStatus resultado;
 
         while (true){
             contaMenu();
@@ -25,22 +27,22 @@ public class Main {
                     printSaldo(acc);
                     break;
                 case 2:
-                    // deposito
+                    // deposit
                     printValorDeposito();
-                    resultado = acc.deposito(ui.getDouble());
+                    resultado = accService.deposit(acc,ui.getDouble());
                     switch (resultado) {
-                        case SUCESSO           -> printDepositoSucesso();
-                        case VALOR_INVALIDO    -> printValorInvalid();
+                        case SUCCESS -> printDepositoSucesso();
+                        case INVALID_VALUE -> printValorInvalid();
                     }
                     break;
                 case 3:
-                    // saque
+                    // withdraw
                     printValorSaque();
-                    resultado = acc.saque(ui.getDouble());
+                    resultado = accService.withdraw(acc,ui.getDouble());
                     switch (resultado) {
-                        case SUCESSO           -> printSaqueSucesso();
-                        case VALOR_INVALIDO    -> printValorInvalid();
-                        case FALHA -> printSaqueFalha();
+                        case SUCCESS -> printSaqueSucesso();
+                        case INVALID_VALUE -> printValorInvalid();
+                        case FAILED -> printSaqueFalha();
                     }
                     break;
                 case 4:
@@ -48,11 +50,12 @@ public class Main {
                     printExtrato(acc);
                     break;
                 case 0:
+                    saveAccount(acc);
                     System.exit(0);
                 default:
                     printOpcaoInvalid();
             }
-            salvarConta(acc);
+            saveAccount(acc);
         }
     }
 }
